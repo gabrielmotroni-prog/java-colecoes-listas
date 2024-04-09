@@ -9,13 +9,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean flagCompra = true;
-        boolean flagConta = true;
         Conta conta = new Conta();
         Compra compra;
 
         // Criar conta
         // Crie um objeto Scanner para ler a entrada do usuário
+        System.out.println("################");
+        System.out.println("> criando nova conta:");
         Scanner scanner = new Scanner(System.in);
+
+
 
         System.out.println("digite descricao da conta: ");
         String descricaoConta = scanner.nextLine();
@@ -29,6 +32,9 @@ public class Main {
         compra = new Compra("compra online", conta);
 
         while (flagCompra){
+            System.out.println("################");
+            System.out.println("> criando novo produto:");
+
             System.out.print("digite nome do produto: ");
             String nomeProduto = scanner.nextLine();
 
@@ -40,21 +46,21 @@ public class Main {
 
             Produto produto = new Produto(nomeProduto,valorProduto,quantidadeProduto);
 
-            //tenta realizar compra
+            //tenta realizar compra verificando saldo na conta com produto
             int tentativaDeCompra = compra.realizarCompra(produto);
 
             if(tentativaDeCompra == 0 ){
                 System.out.println("Ops! compra finalizada por falta de saldo!");
+                flagCompra=false;
                 compra.finalizarCompra();
                 scanner.close();
+                return;
             }
 
             System.out.print("Digite 1 para continuar ou 0 para encerrar: ");
-
             //verifica se existe proxima linha
             if(scanner.hasNext()){
-
-                int msgEncerramento = scanner.nextInt();
+                int msgEncerramento = Integer.parseInt(scanner.nextLine());
 
                 //fechar o Scanner quando terminar de usá-lo
                 if(msgEncerramento == 0 ){
@@ -64,6 +70,8 @@ public class Main {
                     scanner.close();
                 }
             }
+            System.out.println("################");
+            System.out.println("> criando novo produto:");
 
         }
 
@@ -71,17 +79,18 @@ public class Main {
 
 
 
-        // produtp
+        // Produto
         // nome
         // valor
         // quantidade
 
-        //compras
+        // Compra
+        // conta
         // lista de produtos
         // valor total
 
-        //conta
-        //nome
+        // Conta
+        // nome
         //saldo
     }
 }

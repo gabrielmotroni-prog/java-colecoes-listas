@@ -36,12 +36,14 @@ public class Compra {
 
         if(valorReal > this.comprador.getSaldo()){
             System.out.println("Saldo insuficiente");
+            System.out.println("Valor Total: R$" + this.valorTotal);
             //finaliza
             return 0;
         }
         else{
             System.out.println("Produto " + produto.getNome() + " comprado!");
             this.listDeItems.add(produto);
+            this.valorTotal+= produto.getValor();
             //continua
             return 1;
         }
@@ -55,11 +57,19 @@ public class Compra {
 
         System.out.println("################");
 
-        System.out.println("Items comprados: ");
-        listDeItems.forEach(produto-> System.out.println(
-                "Produto: " + produto.getNome() +
-                        " Valor: " + produto.getValor() + " Quantidade: " + produto.getQuantidade()));
-        System.out.println("################");
+        System.out.println("Items comprado: ");
+
+        if(listDeItems.isEmpty()){
+            System.out.println("nada foi comprado!");
+        }
+        else{
+            listDeItems.forEach(produto-> System.out.println(
+                    "Produto: " + produto.getNome() +
+                            " Valor: " + produto.getValor() + " Quantidade: " + produto.getQuantidade()));
+            System.out.println("################");
+            System.out.println("Valor Total: R$" + this.valorTotal);
+        }
+
 
     }
 
