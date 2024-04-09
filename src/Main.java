@@ -1,4 +1,6 @@
+import modelos.Compra;
 import modelos.Conta;
+import modelos.Produto;
 
 import java.util.Scanner;
 
@@ -9,6 +11,7 @@ public class Main {
         boolean flagCompra = true;
         boolean flagConta = true;
         Conta conta = new Conta();
+        Compra compra;
 
         // Criar conta
         // Crie um objeto Scanner para ler a entrada do usuário
@@ -20,6 +23,11 @@ public class Main {
         System.out.println("digite saldo da conta: ");
         double saldoConta  = Double.parseDouble(scanner.nextLine());
 
+        conta.setNome(descricaoConta);
+        conta.setSaldo(saldoConta);
+
+        compra = new Compra("compra online", conta);
+
         while (flagCompra){
             System.out.print("digite nome do produto: ");
             String nomeProduto = scanner.nextLine();
@@ -29,6 +37,17 @@ public class Main {
 
             System.out.print("quantidade valor do produto: ");
             int quantidadeProduto = Integer.parseInt( scanner.nextLine());
+
+            Produto produto = new Produto(nomeProduto,valorProduto,quantidadeProduto);
+
+            //tenta realizar compra
+            int tentativaDeCompra = compra.realizarCompra(produto);
+
+            if(tentativaDeCompra == 0 ){
+                System.out.println("Ops! compra finalizada por falta de saldo!");
+                compra.finalizarCompra();
+                scanner.close();
+            }
 
             System.out.print("Digite 1 para continuar ou 0 para encerrar: ");
 
@@ -41,6 +60,7 @@ public class Main {
                 if(msgEncerramento == 0 ){
                     System.out.println("Compras finalizadas!");
                     flagCompra=false;
+                    compra.finalizarCompra();
                     scanner.close();
                 }
             }
