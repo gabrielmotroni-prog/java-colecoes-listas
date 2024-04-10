@@ -1,9 +1,11 @@
 package modelos;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-public class Compra {
+public class Compra  {
     private String descricaoCompra;
     private double valorTotal;
     private List<Produto> listDeItems = new ArrayList<Produto>();
@@ -63,6 +65,10 @@ public class Compra {
             System.out.println("nada foi comprado!");
         }
         else{
+
+            //orderna lista pelo valor (foi implementado compareTo em Produto)
+            Collections.sort(listDeItems);
+
             listDeItems.forEach(produto-> System.out.println(
                     "Produto: " + produto.getNome() +
                             " Valor: " + produto.getValor() + " Quantidade: " + produto.getQuantidade()));
@@ -72,6 +78,4 @@ public class Compra {
 
 
     }
-
-
 }

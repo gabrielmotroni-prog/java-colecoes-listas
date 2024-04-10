@@ -1,6 +1,6 @@
 package modelos;
 
-public class Produto {
+public class Produto implements Comparable<Produto> {
     private String nome;
     private double valor;
 
@@ -34,5 +34,19 @@ public class Produto {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+
+    @Override
+    public int compareTo(Produto outroProduto) {
+        if(this.getValor() < outroProduto.getValor()){
+            return -1; // Este produto é menor que o produto passado como parâmetro
+        }
+        else if(this.valor > outroProduto.valor){
+            return 1; // Este produto é maior que o produto passado como parâmetro
+        }
+        else{
+            return 0; // Os valores dos produtos são iguais
+        }
     }
 }
